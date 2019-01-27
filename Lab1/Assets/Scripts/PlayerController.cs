@@ -44,14 +44,19 @@ public class PlayerController : MonoBehaviour {
             count++;
             SetCountText();
         }
+        else if(other.gameObject.CompareTag("Finish")){
+            other.gameObject.SetActive(false);
+            if(count >= 8){
+                winText.text = "You Win!";
+            }
+            else{
+                winText.text = "You didn't get all of the items!!\n You Lose!";
+            }
+        }
     }
 
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if(count >= 8)
-        {
-            winText.text = "You Win!";
-        }
     }
 }

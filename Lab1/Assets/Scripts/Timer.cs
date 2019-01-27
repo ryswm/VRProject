@@ -20,9 +20,6 @@ public class Timer : MonoBehaviour {
 		if(!(gameObject.transform.position.Equals(trig))){
 			timerLength -= Time.deltaTime;
 			timer.text = timerLength.ToString();
-			if(timerLength <= 0){
-				
-			}
 		}
 		
 	}
