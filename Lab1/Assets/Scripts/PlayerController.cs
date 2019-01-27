@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private int count;
+    public int jump;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +26,13 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate(){
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        float jumpUp = Input.GetAxis("Jump");
         Vector3 v3 = new Vector3(-moveVertical,0.0f,moveHorizontal);
         rb.AddForce(v3*speed);
+
+        if(Input.GetKeyDown("space")){
+             rb.AddForce(new Vector3(0,jump,0), ForceMode.Impulse);
+        }
+       
 
     }
 
