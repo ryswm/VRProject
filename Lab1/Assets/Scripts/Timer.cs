@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour {
 
 	public float timerLength;
 	public Text timer;
+	public Text win;
 	public GameObject gameObject;
 	private Vector3 trig;
 
@@ -17,10 +18,9 @@ public class Timer : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(!(gameObject.transform.position.Equals(trig))){
+		if(!(gameObject.transform.position.Equals(trig)) && !(win.text.Equals("You Win!")) && timerLength > 0){
 			timerLength -= Time.deltaTime;
 			timer.text = timerLength.ToString();
 		}
-		
 	}
 }

@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
                 winText.text = "You Win!";
             }
             else{
-                winText.text = "You didn't get all of the items!!\n You Lose!";
+                winText.text = "You Lose!";
             }
         }
     }
