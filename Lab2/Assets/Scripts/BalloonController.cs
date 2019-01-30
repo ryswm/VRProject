@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BalloonController : MonoBehaviour {
-
-	private Rigidbody rb;
-	// Use this for initialization
-	void Start () {
-		rb = GetComponent<Rigidbody> ();
+	public Rigidbody controller;
+	private Vector3 offset;
+	void Start(){
+		offset = transform.position - controller.transform.position;
 	}
-	
-	// Update is called once per frame
-	public void Update () {
-		while (transform.localScale.x < 2.0)
-			transform.localScale += new Vector3 (0.2f, 0.2f, 0.2f) * Time.deltaTime;
-		if (transform.localScale.x > 2.0f) {
-			rb.velocity = transform.TransformDirection (Vector3.forward * 10);
-		}
+	void Update () {
+		Vector3 from = rb.transform.localScale;
+        Vector3 to = new Vector3(2.0f,2.0f,2.0f);
+        float timer = 0.1f;
+
+        transform.localScale = Vector3.Lerp(from, to, timer*Time.deltaTime);
+	}
+
+	void LateUpdate () {
+        transform.position = controller.transform.position + offset;
 	}
 }

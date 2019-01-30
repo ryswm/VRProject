@@ -50,11 +50,7 @@ public class Controller_Template : MonoBehaviour {
         if (Controller.GetHairTriggerDown()) {
 			Rigidbody clone;
 			clone = Instantiate (balloon, transform.position, transform.rotation) as Rigidbody;
-			clone.GetComponent<Rigidbody>().Update ();
-
-				
-
-
+			
         }
 
         if (Controller.GetHairTrigger()) {
@@ -66,10 +62,6 @@ public class Controller_Template : MonoBehaviour {
             Debug.Log(gameObject.name + " Trigger Release");
            
         }
-
-
-
-
 
 
     }
