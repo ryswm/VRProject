@@ -9,7 +9,7 @@ public class BalloonController : MonoBehaviour {
 		offset = transform.position - controller.transform.position;
 	}
 	void Update () {
-		Vector3 from = rb.transform.localScale;
+	Vector3 from = transform.localScale;
         Vector3 to = new Vector3(2.0f,2.0f,2.0f);
         float timer = 0.1f;
 
