@@ -11,6 +11,7 @@ public class MakeSpheres : MonoBehaviour {
 			Rigidbody clone;
 			clone = Instantiate(sphere);
 			clone.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+			clone.transform.parent = null;
 		}
 	}
 }
