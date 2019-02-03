@@ -5,6 +5,8 @@ using UnityEngine;
 public class Controller_Template : MonoBehaviour {
     
 	public Rigidbody balloon;
+	public GameObject laser;
+	GameObject pointer;
 
 
     private SteamVR_TrackedObject trackedObj;
@@ -31,6 +33,10 @@ public class Controller_Template : MonoBehaviour {
         // If left Grip Button is pressed, Spawn ballon
         if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip)) {
             Debug.Log(gameObject.name + " Grip Press");
+			Rigidbody clone;
+			clone = Instantiate (balloon, transform.position, transform.rotation) as Rigidbody;
+			clone.transform.SetParent (trackedObj.transform);
+			clone.transform.localPosition = Vector3.zero;
     
         }
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {
@@ -47,22 +53,30 @@ public class Controller_Template : MonoBehaviour {
         }
 
         
-        if (Controller.GetHairTriggerDown()) {
-			Rigidbody clone;
-			clone = Instantiate (balloon, transform.position, transform.rotation) as Rigidbody;
-			
-        }
+		if (Controller.GetHairTriggerDown ()) {
+			pointer = Instantiate (laser) as GameObject;
+			pointer.transform.SetParent (trackedObj.transform);
+			pointer.transform.localPosition = new Vector3 (0.0f, 0.0f, 0.5f);
+		}
 
         if (Controller.GetHairTrigger()) {
             Debug.Log(gameObject.name + "Press Hold");
-           
+
+
         }
 
         if (Controller.GetHairTriggerUp()) {
             Debug.Log(gameObject.name + " Trigger Release");
-           
+			Destroy (pointer);
         }
 
 
     }
+
+
+
+	/*void newBalloon(GameObject parent){
+		
+	}*/
+
 }
