@@ -33,10 +33,11 @@ public class Controller_Template : MonoBehaviour {
         // If left Grip Button is pressed, Spawn ballon
         if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip)) {
             Debug.Log(gameObject.name + " Grip Press");
+            
 			Rigidbody clone;
 			clone = Instantiate (balloon, transform.position, transform.rotation) as Rigidbody;
 			clone.transform.SetParent (trackedObj.transform);
-			clone.transform.localPosition = Vector3.zero;
+			clone.transform.localPosition = new Vector3(0.0f, 0.0f, 0.1f);
     
         }
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {

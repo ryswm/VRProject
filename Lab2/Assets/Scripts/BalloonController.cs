@@ -16,10 +16,8 @@ public class BalloonController : MonoBehaviour {
         float timer = 0.1f;
 
         transform.localScale = Vector3.Lerp(from, to, timer*Time.deltaTime);
-		Debug.Log (transform.localScale);
 
 		if (transform.localScale.x >= 1.3f) {
-
 			transform.parent = null;
 			rb.isKinematic = false;
 			rb.AddForce (Vector3.one * strength);
