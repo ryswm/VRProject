@@ -24,29 +24,30 @@ public class ControllerInput : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		foreach (string i in UnityEngine.Input.GetJoystickNames())
+		foreach (string i in Input.GetJoystickNames())
         {
             print(i);
         }
 
-        copy = Instantiate(laser, this.transform ) as GameObject;
+        copy = Instantiate(laser) as GameObject;
         
         beam = copy.GetComponent<LineRenderer>();
         beam.enabled = false;
 
-        cam = GameObject.Find("Camera Rig");
+        cam = GameObject.Find("[CameraRig]");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        copy.transform.position = this.transform.position;
-        beam.enabled = true;
-        if (Controller.GetHairTriggerDown())
+        
+        if (Controller.GetHairTrigger())
         {
 
-         
-           
-            Ray line = new Ray(transform.parent.position, transform.parent.forward);
+            beam.enabled = true;
+            copy.transform.SetParent( this.transform);
+            copy.transform.localPosition = Vector3.zero;
+
+            Ray line = new Ray(this.transform.position, this.transform.forward);
             RaycastHit point;
 
             beam.SetPosition(0, line.origin);
@@ -67,12 +68,8 @@ public class ControllerInput : MonoBehaviour {
 
         if (Controller.GetHairTriggerUp())
         {
+
             beam.enabled = false;
         }
 	}
-
-    void renderLine()
-    {
-       
-    }
 }
