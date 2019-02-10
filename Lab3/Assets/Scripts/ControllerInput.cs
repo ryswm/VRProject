@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class ControllerInput : MonoBehaviour {
 
-    public GameObject laser;
-    private GameObject copy;
-    private LineRenderer beam;
-    private GameObject cam;
+    public GameObject laser;    // Laser model
+    private GameObject copy;    //Laser copy
+    private LineRenderer beam;  //Laser renderer
+    public GameObject telePointer;  //Teleport point model
+    private GameObject copyPoint;   //Teleport point copy
+    private GameObject player;         //Player
+    public GameObject cam;
+
+    RaycastHit point;
+
+
+    private bool canTele;                   //If teleport function should be called
 
     private SteamVR_TrackedObject trackedObj;
 
@@ -30,46 +38,73 @@ public class ControllerInput : MonoBehaviour {
         }
 
         copy = Instantiate(laser) as GameObject;
-        
+        copy.transform.SetParent(this.transform);
+        copy.transform.localPosition = Vector3.zero;
+
+        copyPoint = Instantiate(telePointer) as GameObject;
+        copyPoint.transform.SetParent(copy.transform);
+        copyPoint.SetActive(false);
+
         beam = copy.GetComponent<LineRenderer>();
         beam.enabled = false;
 
-        cam = GameObject.Find("[CameraRig]");
+        player = GameObject.Find("[CameraRig]");
+       // cam = GameObject.Find("Camera (eye)");
     }
 	
 	// Update is called once per frame
 	void Update () {
         
-        if (Controller.GetHairTrigger())
+        if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
             beam.enabled = true;
-            copy.transform.SetParent( this.transform);
-            copy.transform.localPosition = Vector3.zero;
+           
 
             Ray line = new Ray(this.transform.position, this.transform.forward);
-            RaycastHit point;
+           
 
             beam.SetPosition(0, line.origin);
 
-            if (Physics.Raycast(line, out point, 100))
+            if (Physics.Raycast(line, out point, 100))      //If raycast hits
             {
                 beam.SetPosition(1, point.point);
-                if (point.transform.tag == "Floor")
+                if (point.transform.tag == "Floor")     //If raycast hits floor
                 {
-                    cam.transform.position = point.point;
+                    canTele = true;
+
+                    copyPoint.transform.position = point.point;
+                    copyPoint.SetActive(true);
+                }
+                else                                          //If not hitting floor
+                {
+                    canTele = false;
+                    copyPoint.SetActive(false);
                 }
             }
-            else
+            else //If raycast does not hit
             {
                 beam.SetPosition(1, line.GetPoint(100));
             }
-        }
-
-        if (Controller.GetHairTriggerUp())
-        {
+        } else {                                            //If button not pushed
 
             beam.enabled = false;
+            copyPoint.SetActive(false);
+
+            if(canTele)
+            {
+                Teleport();
+            }
         }
 	}
+
+    void Teleport()
+    {
+        canTele = false;
+        Vector3 diff = player.transform.position - cam.transform.position;
+        diff.y = 0;
+
+        player.transform.position = point.point + diff;
+    }
+
 }
