@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class FadeController : MonoBehaviour {
 
-	public Animator animate;
+	private Animator animate;
+
+	void Start(){
+		animate = GetComponent<Animator>();
+	}
 
 	public void FadeEffect(){
 		animate.SetTrigger("FadeOut");
