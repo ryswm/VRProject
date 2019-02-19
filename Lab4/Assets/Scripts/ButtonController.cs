@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : Interactable {
+public class ButtonController : MonoBehaviour {
 
     private Transform button;
 
@@ -19,11 +19,8 @@ public class ButtonController : Interactable {
 
 
     private void Start() {
-
         button = this.transform;
-        buttonPressPos = button.localPosition.x;
-        originalX = buttonPressPos;
-        Debug.Log(buttonPressPos);
+        originalX = button.position.x;
     }
 
     private void Update() {

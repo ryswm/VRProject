@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour {
 
-    /*
-     *  Controller Setup
-     */
+    //Controller Setup
     private SteamVR_TrackedObject trackedObject;
     private SteamVR_Controller.Device Controller { get { return SteamVR_Controller.Input((int)trackedObject.index); } }
     private void Awake() { trackedObject = GetComponent<SteamVR_TrackedObject>(); }
@@ -14,16 +12,29 @@ public class HandController : MonoBehaviour {
     //Setup
     private LineRenderer laser;
     private RaycastHit hitPoint;
-    private GameObject selectedObj;
+
+    [Header("Selected Objects:")]
+    public GameObject selectedObj;
+    private GameObject heldItem;
+    private GameObject hitObj;
+
+    
+    [Header("Highlight Material:")]
     private Material[] objMats;
     public Material highlight;
 
     private void Start() {
         laser = this.GetComponent<LineRenderer>();
         laser.enabled = false;
+
+        FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+        joint.breakForce = 750;
+        joint.breakTorque = 750;
     }
 
     void Update() {
+
+        // Laser pointer on Grip press
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {
             laser.enabled = true;
 
@@ -50,9 +61,17 @@ public class HandController : MonoBehaviour {
         else {
             laser.enabled = false;
         }
+
+        if(Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger)){
+            if(hitObj){
+                Grab();
+            }
+        } else {
+            Release();
+        }
     }
 
-
+    //Highlight control
     void SetHighlight(GameObject selectedObj) {
         objMats = selectedObj.GetComponent<Renderer>().materials;
         objMats[1] = highlight;
@@ -64,4 +83,38 @@ public class HandController : MonoBehaviour {
         objMats[1] = null;
         selectedObj.GetComponent<Renderer>().materials = objMats;
     }
+
+
+    //Object interaction
+    void Grab(){
+        heldItem = hitObj;
+        joint.connectedBody = heldItem.GetComponent<Rigidbody>();
+    }
+
+    void Release(){
+        if(joint.connectedBody){
+            heldItem.GetComponent<Rigidbody>().velocity = Controller.velocity;
+            heldItem.GetComponent<Rigidbody>().angularVelocity = Controller.angularVelocity;
+            joint.connectedBody = null;
+        }
+        heldItem = null;
+    }
+
+    //Collider functions
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.attachedRigidbody == null) return;
+        hitObj = other.gameObject;
+    }
+
+    private void OnTriggerStay(Collider other){
+        if(other.attachedRigidbody == null) return;
+        hitObj = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other){
+        hitObj = null;
+    }
+
+
 }
