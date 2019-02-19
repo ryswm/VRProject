@@ -24,7 +24,7 @@ public class HandController : MonoBehaviour {
     }
 
     void Update() {
-        if (Controller.GetHairTrigger()) {
+        if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {
             laser.enabled = true;
 
             Ray cast = new Ray(this.transform.position, this.transform.forward);
