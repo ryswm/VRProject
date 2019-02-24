@@ -29,22 +29,21 @@ public class HandController : MonoBehaviour {
         laser = this.GetComponent<LineRenderer>();
         laser.enabled = false;
 
-        joint = GetComponent<FixedJoint>();
-        joint.breakForce = 750;
-        joint.breakTorque = 750;
+        
     }
 
     void Update() {
 
         // Laser pointer on Grip press
-        if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {
+        if (Controller.GetHairTrigger()) {
             laser.enabled = true;
 
-            Ray cast = new Ray(this.transform.position, this.transform.forward);
+            Ray cast = new Ray(trackedObject.transform.position, trackedObject.transform.forward);
 
             laser.SetPosition(0, cast.origin);
 
             if (Physics.Raycast(cast, out hitPoint, 100)){
+                
                 laser.SetPosition(1, hitPoint.point);
                 selectedObj = hitPoint.collider.gameObject;
                 if(selectedObj.tag == "Selectable") {
@@ -56,7 +55,7 @@ public class HandController : MonoBehaviour {
             }
             else {
                 laser.SetPosition(1, cast.GetPoint(100));
-                RemoveHighlight(selectedObj);
+                if(selectedObj) RemoveHighlight(selectedObj);
                 selectedObj = null;
             }
         }
@@ -64,12 +63,13 @@ public class HandController : MonoBehaviour {
             laser.enabled = false;
         }
 
-        if(Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger)){
+        if(Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)){
+            
             if(hitObj){
                 Grab();
             }
         } else {
-            Release();
+            if (heldItem) Release();
         }
     }
 
@@ -82,15 +82,17 @@ public class HandController : MonoBehaviour {
 
     void RemoveHighlight(GameObject selectedObj) {
         objMats = selectedObj.GetComponent<Renderer>().materials;
-        objMats[1] = null;
+        if(objMats.Length > 1) objMats[1] = null;
         selectedObj.GetComponent<Renderer>().materials = objMats;
     }
 
-
+    
     //Object interaction
     void Grab(){
+        joint = gameObject.AddComponent<FixedJoint>();
         heldItem = hitObj;
         joint.connectedBody = heldItem.GetComponent<Rigidbody>();
+        Debug.Log(heldItem.name);
     }
 
     void Release(){
@@ -98,6 +100,7 @@ public class HandController : MonoBehaviour {
             heldItem.GetComponent<Rigidbody>().velocity = Controller.velocity;
             heldItem.GetComponent<Rigidbody>().angularVelocity = Controller.angularVelocity;
             joint.connectedBody = null;
+            Destroy(joint);
         }
         heldItem = null;
     }
@@ -107,6 +110,7 @@ public class HandController : MonoBehaviour {
     {
         if (other.attachedRigidbody == null) return;
         hitObj = other.gameObject;
+        Debug.Log(hitObj.name);
     }
 
     private void OnTriggerStay(Collider other){
@@ -118,9 +122,9 @@ public class HandController : MonoBehaviour {
         hitObj = null;
     }
 
-    private void OnCollisionEnter(Collider col){
+    private void OnCollisionEnter(Collision col){
         Debug.Log(col);
     }
 
-
+    
 }

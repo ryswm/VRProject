@@ -14,7 +14,7 @@ public class ButtonPush : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collider col){
+	void OnCollisionEnter(Collision col){
 		Debug.Log(col.gameObject.name);
 	}
 }
