@@ -13,6 +13,8 @@ public class HandController : MonoBehaviour {
     private LineRenderer laser;
     private RaycastHit hitPoint;
 
+    private FixedJoint joint;
+
     [Header("Selected Objects:")]
     public GameObject selectedObj;
     private GameObject heldItem;
@@ -27,7 +29,7 @@ public class HandController : MonoBehaviour {
         laser = this.GetComponent<LineRenderer>();
         laser.enabled = false;
 
-        FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+        joint = GetComponent<FixedJoint>();
         joint.breakForce = 750;
         joint.breakTorque = 750;
     }
@@ -114,6 +116,10 @@ public class HandController : MonoBehaviour {
 
     private void OnTriggerExit(Collider other){
         hitObj = null;
+    }
+
+    private void OnCollisionEnter(Collider col){
+        Debug.Log(col);
     }
 
 
