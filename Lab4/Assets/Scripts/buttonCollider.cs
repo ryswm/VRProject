@@ -7,20 +7,32 @@ public class buttonCollider : MonoBehaviour {
 	private bool isHit = false;
 
 	private Vector3 startPos, currPos;
+	private Vector3 limit;
+	private float t = 0.0001f;
 
 	void Start(){
 		startPos = GetComponent<Transform>().position;
-		currPos =  startPos;
+		limit = new Vector3(startPos.x + 0.2f, startPos.y, startPos.z);
+
+		Debug.Log("Start" + startPos);
+		Debug.Log("limit" + limit);
+	-		
 	}
 
 	void Update(){
+		currPos = GetComponent<Transform>().position;
 		if(isHit){
-			Debug.Log("Should be Moving");
-			currPos.x -= 0.01f;
+			
+			if(currPos.x > limit.x) currPos.x = limit.x;
 		}
 		else {
-			currPos.x = Mathf.Lerp(currPos.x, currPos.x, startPos.x);
+			Debug.Log("Should be Moving");
+			currPos = new Vector3(Mathf.Lerp(currPos.x, startPos.x, t), currPos.y, currPos.z);
+
+
+		
 		}
+			gameObject.transform.position = currPos;
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -37,7 +49,8 @@ public class buttonCollider : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit(Collider col){
+	void OnCollisionExit(Collision col){
+		Debug.Log("Exit");
 		isHit = false;
 	}
 }
