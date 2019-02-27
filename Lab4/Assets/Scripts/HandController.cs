@@ -43,6 +43,10 @@ public class HandController : MonoBehaviour {
         laser.enabled = false;
     }
 
+    void OnTriggerEnter(Collider col){
+        Debug.Log(col.gameObject.name);
+    }
+
     void Update() {
         if (trigPress) {
             Debug.Log("pressed");
