@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2897197, g: 0.32174814, b: 0.30475196, a: 1}
+  m_IndirectSpecularColor: {r: 0.2897185, g: 0.3217467, b: 0.3047503, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5837af0260a118e4d808bfe0405429a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  persistOnLoad: 0
   autoManageScriptDefines: 1
   activeScriptingDefineSymbolsWithoutSDKClasses: []
   scriptAliasLeftController: {fileID: 267116654}
@@ -224,8 +225,6 @@ MonoBehaviour:
   setups:
   - {fileID: 1053631222}
   - {fileID: 1433303837}
-  excludeTargetGroups: 1b0000001a000000
-  persistOnLoad: 0
 --- !u!4 &148607572
 Transform:
   m_ObjectHideFlags: 0
@@ -404,9 +403,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3cd5456cd79e49948f5ceb58544b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointerToggleButton: 10
+  pointerSetButton: 10
+  grabToggleButton: 7
+  useToggleButton: 3
+  uiClickButton: 3
+  menuToggleButton: 14
   axisFidelity: 1
-  senseAxisForceZeroThreshold: 0.15
-  senseAxisPressThreshold: 0.95
   triggerClickThreshold: 1
   triggerForceZeroThreshold: 0.01
   triggerAxisZeroOnUntouch: 0
@@ -418,7 +421,6 @@ MonoBehaviour:
   triggerHairlinePressed: 0
   triggerClicked: 0
   triggerAxisChanged: 0
-  triggerSenseAxisChanged: 0
   gripPressed: 0
   gripTouched: 0
   gripHairlinePressed: 0
@@ -427,20 +429,16 @@ MonoBehaviour:
   touchpadPressed: 0
   touchpadTouched: 0
   touchpadAxisChanged: 0
-  touchpadSenseAxisChanged: 0
-  touchpadTwoTouched: 0
-  touchpadTwoPressed: 0
-  touchpadTwoAxisChanged: 0
   buttonOnePressed: 0
   buttonOneTouched: 0
   buttonTwoPressed: 0
   buttonTwoTouched: 0
   startMenuPressed: 0
-  middleFingerSenseAxisChanged: 0
-  ringFingerSenseAxisChanged: 0
-  pinkyFingerSenseAxisChanged: 0
-  gripSenseAxisChanged: 0
-  gripSensePressed: 0
+  pointerPressed: 0
+  grabPressed: 0
+  usePressed: 0
+  uiClickPressed: 0
+  menuPressed: 0
   controllerVisible: 1
 --- !u!65 &267116658
 BoxCollider:
@@ -1142,7 +1140,7 @@ GameObject:
   - component: {fileID: 930281792}
   - component: {fileID: 930281796}
   m_Layer: 0
-  m_Name: Button
+  m_Name: button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1207,6 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e4d8c886ad44872b0b6f468779950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!33 &930281793
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1558,6 +1557,7 @@ GameObject:
   - component: {fileID: 1099742339}
   - component: {fileID: 1099742338}
   - component: {fileID: 1099742337}
+  - component: {fileID: 1099742341}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Selectable
@@ -1633,6 +1633,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099742341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1099742336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb82c2a1d119444194163bad7b73e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  buttonPush1: {fileID: 0}
+  buttonPush2: {fileID: 0}
+  buttonPush3: {fileID: 0}
+  highlight: {fileID: 0}
 --- !u!1 &1119172996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,7 +1810,7 @@ GameObject:
   - component: {fileID: 1168659343}
   - component: {fileID: 1168659347}
   m_Layer: 0
-  m_Name: Button
+  m_Name: button3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,6 +1875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e4d8c886ad44872b0b6f468779950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!33 &1168659344
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1924,6 +1943,7 @@ GameObject:
   - component: {fileID: 1186968555}
   - component: {fileID: 1186968554}
   - component: {fileID: 1186968553}
+  - component: {fileID: 1186968557}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Selectable
@@ -1999,6 +2019,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1186968557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186968552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb82c2a1d119444194163bad7b73e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  buttonPush1: {fileID: 0}
+  buttonPush2: {fileID: 0}
+  buttonPush3: {fileID: 0}
+  highlight: {fileID: 0}
 --- !u!21 &1191361318
 Material:
   serializedVersion: 6
@@ -2633,6 +2671,7 @@ GameObject:
   - component: {fileID: 1628905120}
   - component: {fileID: 1628905119}
   - component: {fileID: 1628905118}
+  - component: {fileID: 1628905122}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Selectable
@@ -2707,6 +2746,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1628905122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1628905117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb82c2a1d119444194163bad7b73e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  buttonPush1: {fileID: 0}
+  buttonPush2: {fileID: 0}
+  buttonPush3: {fileID: 0}
+  highlight: {fileID: 0}
 --- !u!1 &1649914305 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000013941130086, guid: be540b97364be0a4890e39e62ac89ed1,
@@ -2758,9 +2815,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3cd5456cd79e49948f5ceb58544b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointerToggleButton: 10
+  pointerSetButton: 10
+  grabToggleButton: 7
+  useToggleButton: 3
+  uiClickButton: 3
+  menuToggleButton: 14
   axisFidelity: 1
-  senseAxisForceZeroThreshold: 0.15
-  senseAxisPressThreshold: 0.95
   triggerClickThreshold: 1
   triggerForceZeroThreshold: 0.01
   triggerAxisZeroOnUntouch: 0
@@ -2772,7 +2833,6 @@ MonoBehaviour:
   triggerHairlinePressed: 0
   triggerClicked: 0
   triggerAxisChanged: 0
-  triggerSenseAxisChanged: 0
   gripPressed: 0
   gripTouched: 0
   gripHairlinePressed: 0
@@ -2781,20 +2841,16 @@ MonoBehaviour:
   touchpadPressed: 0
   touchpadTouched: 0
   touchpadAxisChanged: 0
-  touchpadSenseAxisChanged: 0
-  touchpadTwoTouched: 0
-  touchpadTwoPressed: 0
-  touchpadTwoAxisChanged: 0
   buttonOnePressed: 0
   buttonOneTouched: 0
   buttonTwoPressed: 0
   buttonTwoTouched: 0
   startMenuPressed: 0
-  middleFingerSenseAxisChanged: 0
-  ringFingerSenseAxisChanged: 0
-  pinkyFingerSenseAxisChanged: 0
-  gripSenseAxisChanged: 0
-  gripSensePressed: 0
+  pointerPressed: 0
+  grabPressed: 0
+  usePressed: 0
+  uiClickPressed: 0
+  menuPressed: 0
   controllerVisible: 1
 --- !u!4 &1787208695
 Transform:
@@ -3135,7 +3191,7 @@ GameObject:
   - component: {fileID: 2026774074}
   - component: {fileID: 2026774070}
   m_Layer: 0
-  m_Name: Button
+  m_Name: button1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3200,6 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e4d8c886ad44872b0b6f468779950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!33 &2026774071
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3248,7 +3305,7 @@ SpringJoint:
   m_Spring: 10
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0.2
+  m_MaxDistance: 0
   m_Tolerance: 0.025
   m_BreakForce: Infinity
   m_BreakTorque: Infinity

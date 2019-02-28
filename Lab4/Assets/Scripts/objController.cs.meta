@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: aeb82c2a1d119444194163bad7b73e35
+timeCreated: 1551322799
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - button1: {instanceID: 0}
+  - button2: {instanceID: 0}
+  - button3: {instanceID: 0}
+  - buttonPush1: {instanceID: 0}
+  - buttonPush2: {instanceID: 0}
+  - buttonPush3: {instanceID: 0}
+  - highlight: {fileID: 2100000, guid: 562f2be4174fb8f4c8048f41499a0456, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

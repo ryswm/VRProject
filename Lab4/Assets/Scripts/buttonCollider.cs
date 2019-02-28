@@ -10,47 +10,65 @@ public class buttonCollider : MonoBehaviour {
 	private Vector3 limit;
 	private float t = 0.0001f;
 
+	private Rigidbody rb, rFreeze, rStart;
+
+	private Vector3 force = new Vector3(-0.0001f, 0f, 0f);
+
+	public bool active;
+	
+
+
+
 	void Start(){
 		startPos = GetComponent<Transform>().position;
-		limit = new Vector3(startPos.x + 0.2f, startPos.y, startPos.z);
+		limit = new Vector3(startPos.x + 0.06f, startPos.y, startPos.z);
+
+		rb = GetComponent<Rigidbody>();
+		rStart = rb;
+		rFreeze = rb;
 
 		Debug.Log("Start" + startPos);
-		Debug.Log("limit" + limit);
-	-		
+
 	}
 
 	void Update(){
+		rb.isKinematic = false;
 		currPos = GetComponent<Transform>().position;
-		if(isHit){
-			
-			if(currPos.x > limit.x) currPos.x = limit.x;
-		}
-		else {
-			Debug.Log("Should be Moving");
-			currPos = new Vector3(Mathf.Lerp(currPos.x, startPos.x, t), currPos.y, currPos.z);
-
-
 		
+
+		Debug.Log(currPos);
+		
+		if(currPos.x > limit.x && isHit == true){
+			rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			active = true;
+		}else{
+			rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		}
-			gameObject.transform.position = currPos;
+		
+
+		//Mathf.Clamp(currPos.x, startPos.x, limit.x);
+		gameObject.transform.position = currPos;
+	}
+
+	void FixedUpdate(){
+		if(isHit == false && currPos.x > startPos.x){
+			rb.AddForce(force);
+		}
 	}
 
 	void OnCollisionEnter(Collision col){
-		Debug.Log("hit");
 		if(col.gameObject.tag == "controller"){
 			isHit = true;
 		}
 	}
 
 	void OnTriggerStay(Collider col){
-		Debug.Log("Hitting");
 		if(col.gameObject.tag == "controller"){
 			isHit = true;
 		}
 	}
 
 	void OnCollisionExit(Collision col){
-		Debug.Log("Exit");
 		isHit = false;
 	}
 }
