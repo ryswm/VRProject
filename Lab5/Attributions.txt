@@ -1,9 +1,0 @@
-// Each of your teammates must complete the following for themselves.
-
-Team member name:
-SCS user id:
-Percentage of work done: 50%
-Percentage of mark deserved: 50%
-
-// List any other attributions (code, assets) below:
-
