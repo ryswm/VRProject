@@ -10,6 +10,8 @@ public class ColorSync : NetworkBehaviour {
     [SyncVar]
     public int NumHit = 0;
 
+    [SyncVar]
+    public int PlayerNumHit = 0;
     // When you call a hook from a syncVar, instead of updating the value in all the other clients, the game calls a method
     [SyncVar(hook = "ApplyColor")]
     public Color myColor = Color.white;
@@ -26,7 +28,10 @@ public class ColorSync : NetworkBehaviour {
         //Disregard collisions on the clients.
         if (isServer)
         {
-
+            if (collision.collider.CompareTag("Player")) {
+                PlayerNumHit++;
+                RpcPlayerHitYell();
+            }
             myColor = Random.ColorHSV(0,1,1,1,0.8f,0.8f);
             NumHit++;
             RpcYell();
@@ -38,6 +43,12 @@ public class ColorSync : NetworkBehaviour {
     {
         print(" Oh! I've been hit "+ NumHit + " times!");
     }
+
+    [ClientRpc]
+    void RpcPlayerHitYell() {
+        print(" Oh! I've been hit " + PlayerNumHit + " times!");
+    }
+
     //The parameter is the syncvar's new value.
     void ApplyColor(Color newColor)
     {
