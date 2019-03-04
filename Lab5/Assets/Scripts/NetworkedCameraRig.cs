@@ -71,8 +71,12 @@ public class NetworkedCameraRig : NetworkBehaviour {
     {
         //Instantiate on the sever
         GameObject obj = Instantiate(spherePrefab, pos, rot);
+
+        obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 10.0f;
         //Instantiate on the client
         NetworkServer.Spawn(obj);
+
+        Destroy(obj, 3);
     }
 
     void Update () {
