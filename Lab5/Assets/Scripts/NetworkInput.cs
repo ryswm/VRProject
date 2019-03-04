@@ -15,6 +15,11 @@ public class NetworkInput : MonoBehaviour {
         // How come we have to use joints? 
 
         model = transform.parent.Find(this.name + "Model").gameObject;
+
+        shield = player.CmdCreateShield(transform.position + transform.forward, transform.rotation);
+        shield.transform.SetParent(trackedObject.transform);
+        shield.transform.localPosition = Vector3.zero;
+        shield.SetActive(false);
     }
 
     void Update () {
@@ -36,7 +41,7 @@ public class NetworkInput : MonoBehaviour {
                 }
 
                 if (input.GetHairTriggerDown()) {
-                    shield = player.CmdCreateShield(transform.position + transform.forward, transform.rotation);
+                    shield.SetActive(true);
                 }
                
             } 
