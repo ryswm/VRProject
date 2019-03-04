@@ -7,6 +7,7 @@ public class NetworkInput : MonoBehaviour {
     public SteamVR_TrackedObject trackedObject;
     public NetworkedCameraRig player;
     GameObject model;
+    GameObject shield;
     
     private void Start()
     {
@@ -33,6 +34,11 @@ public class NetworkInput : MonoBehaviour {
                     // Why does this method have to live in the NetworkedCameraRig class?
                     player.CmdCreateSphere(transform.position + transform.forward, transform.rotation);
                 }
+
+                if (input.GetHairTriggerDown()) {
+                    shield = player.CmdCreateShield(transform.position + transform.forward, transform.rotation);
+                }
+               
             } 
         }
     }

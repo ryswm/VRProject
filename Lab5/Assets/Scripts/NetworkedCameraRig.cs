@@ -20,6 +20,10 @@ public class NetworkedCameraRig : NetworkBehaviour {
     GameObject CameraRig;
     Transform NetHead;
     Transform TrackedHead;
+
+
+    //Added by Ryan
+    public GameObject shieldMod;
     
 
     void Start () {
@@ -73,6 +77,13 @@ public class NetworkedCameraRig : NetworkBehaviour {
         GameObject obj = Instantiate(spherePrefab, pos, rot);
         //Instantiate on the client
         NetworkServer.Spawn(obj);
+    }
+
+    [Command]
+    internal GameObject CmdCreateShield(Vector3 pos, Quaternion rot) {
+        GameObject shield = Instantiate(shieldMod, pos, rot);
+        NetworkServer.Spawn(shield);
+        return shield;
     }
 
     void Update () {
