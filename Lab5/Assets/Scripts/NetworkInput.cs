@@ -8,6 +8,8 @@ public class NetworkInput : MonoBehaviour {
     public NetworkedCameraRig player;
     GameObject model;
     GameObject shield;
+
+    GameObject obj;
     
     private void Start()
     {
@@ -15,6 +17,8 @@ public class NetworkInput : MonoBehaviour {
         // How come we have to use joints? 
 
         model = transform.parent.Find(this.name + "Model").gameObject;
+
+        obj = this.gameObject;
     }
 
     void Update () {
@@ -36,7 +40,7 @@ public class NetworkInput : MonoBehaviour {
                 }
 
                 if (input.GetHairTriggerDown()) {
-                    player.CmdCreateShield(transform.position + transform.forward, transform.rotation);
+                    player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
                 }
                
             } 
