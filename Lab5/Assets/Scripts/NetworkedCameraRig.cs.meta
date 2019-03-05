@@ -1,14 +1,15 @@
 fileFormatVersion: 2
 guid: 906ed79e674134032bed3da031bc9901
-timeCreated: 1551663352
+timeCreated: 1551799317
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - CameraRigPrefab: {fileID: 1212099545573230, guid: 14590dadfd23ce3438484ab3dd97db57,
-      type: 2}
+  - CameraRigPrefab: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   - spherePrefab: {fileID: 1577902819440790, guid: 58a758360189cb34ab8f667ab497d970,
+      type: 2}
+  - shieldMod: {fileID: 1056040226549614, guid: fe74a512227be8845bd8ec7ea2d5d807,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

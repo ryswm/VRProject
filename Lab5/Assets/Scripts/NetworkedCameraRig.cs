@@ -28,10 +28,11 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     void Start () {
 
-        NetHead = transform.Find("Head");
+        
         
         // This line is essential:
         if (isLocalPlayer) {
+            NetHead = transform.Find("Head");
 
             //From the login-screen.
             UserName = PlayerPrefs.GetString("PLAYER_USERNAME");
@@ -80,10 +81,9 @@ public class NetworkedCameraRig : NetworkBehaviour {
     }
 
     [Command]
-    internal GameObject CmdCreateShield(Vector3 pos, Quaternion rot) {
+    internal void CmdCreateShield(Vector3 pos, Quaternion rot) {
         GameObject shield = Instantiate(shieldMod, pos, rot);
         NetworkServer.Spawn(shield);
-        return shield;
     }
 
     void Update () {
