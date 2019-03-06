@@ -25,8 +25,11 @@ public class ShieldPosSync : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        pos.position = this.transform.parent.transform.position;
-        pos.rotation = this.transform.parent.transform.rotation;
+        if (isLocalPlayer) {
+            pos.position = this.transform.parent.transform.position;
+            pos.rotation = this.transform.parent.transform.rotation;
+        }
+        
     }
 
 	void ApplyChange(Transform change){
