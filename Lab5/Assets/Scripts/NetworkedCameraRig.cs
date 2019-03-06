@@ -92,8 +92,8 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     [Command]
     internal void CmdDropShield(GameObject obj) {
-        Destroy(obj.transform.GetChild(0).gameObject);
-        NetworkServer.Destroy(obj.transform.GetChild(0).gameObject);
+        Destroy(obj.transform.Find("Shield(Clone)").gameObject);
+        NetworkServer.Destroy(obj.transform.Find("Shield(Clone)").gameObject);
     }
 
     void Update () {
