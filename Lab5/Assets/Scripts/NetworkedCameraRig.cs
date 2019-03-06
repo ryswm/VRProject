@@ -84,7 +84,16 @@ public class NetworkedCameraRig : NetworkBehaviour {
     internal void CmdCreateShield(Vector3 pos, Quaternion rot, GameObject obj) {
         GameObject shield = Instantiate(shieldMod, pos, rot );
         shield.transform.SetParent(obj.transform);
+        shield.transform.localPosition = Vector3.zero;
+        shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
+        shield.transform.Rotate(90f, 0f, 0f, Space.Self);
         NetworkServer.Spawn(shield);
+    }
+
+    [Command]
+    internal void CmdDropShield(GameObject obj) {
+        ;
+        Destroy(obj.transform.GetChild(0).gameObject);
     }
 
     void Update () {

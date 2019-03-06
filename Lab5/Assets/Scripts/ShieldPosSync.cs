@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class ShieldPosSync : NetworkBehaviour {
+    /*
+     * 
+     * 
+     * This Script is unused
+     * 
+     * 
+     */ 
+
 
 	[SyncVar(hook = "ApplyChange")]
 	Transform pos;

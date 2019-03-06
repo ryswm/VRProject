@@ -40,10 +40,22 @@ public class NetworkInput : MonoBehaviour {
                 }
 
                 if (input.GetHairTriggerDown()) {
-                    player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
+                    if (GameObject.FindWithTag("Shield") != null) {
+                        player.CmdDropShield(obj);
+                    }
+                    else {
+                        player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
+                    }
+
                 }
                
-            } 
+            }
+
+
+            if (GameObject.FindWithTag("Shield") != null) {
+                model.SetActive(false);
+                Debug.Log("Shield found");
+            }
         }
     }
 
