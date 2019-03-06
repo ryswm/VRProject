@@ -24,6 +24,7 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     //Added by Ryan
     public GameObject shieldMod;
+    GameObject shield;
     
 
     void Start () {
@@ -82,7 +83,7 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     [Command]
     internal void CmdCreateShield(Vector3 pos, Quaternion rot, GameObject obj) {
-        GameObject shield = Instantiate(shieldMod, pos, rot );
+        shield = Instantiate(shieldMod, pos, rot );
         shield.transform.SetParent(obj.transform);
         shield.transform.localPosition = Vector3.zero;
         shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
@@ -92,8 +93,8 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     [Command]
     internal void CmdDropShield(GameObject obj) {
-        Destroy(obj.transform.Find("Shield(Clone)").gameObject);
-        NetworkServer.Destroy(obj.transform.Find("Shield(Clone)").gameObject);
+        Destroy(shield);
+        NetworkServer.Destroy(shield);
     }
 
     void Update () {
