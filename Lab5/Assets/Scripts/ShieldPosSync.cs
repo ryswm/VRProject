@@ -18,19 +18,20 @@ public class ShieldPosSync : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pos = this.transform.parent.transform;
-	}
+		pos.position = this.transform.parent.transform.position;
+        pos.rotation = this.transform.parent.transform.rotation;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		pos = this.transform.parent.transform;
-	}
+        pos.position = this.transform.parent.transform.position;
+        pos.rotation = this.transform.parent.transform.rotation;
+    }
 
 	void ApplyChange(Transform change){
 		
 		this.transform.position = change.position;
 		this.transform.rotation = change.rotation;
-		this.transform.localScale = change.localScale;
 		pos = change;
 	}
 }
