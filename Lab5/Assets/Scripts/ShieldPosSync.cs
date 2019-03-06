@@ -18,6 +18,7 @@ public class ShieldPosSync : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        pos = this.transform.parent;
 		pos.position = this.transform.parent.transform.position;
         pos.rotation = this.transform.parent.transform.rotation;
     }
