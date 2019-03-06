@@ -39,9 +39,9 @@ public class NetworkInput : MonoBehaviour {
                     player.CmdCreateSphere(transform.position + transform.forward, transform.rotation);
                 }
 
-                if (input.GetHairTriggerDown()) {
-                    if (GameObject.FindWithTag("Shield") != null) {
-                        player.CmdDropShield(obj);
+                if (input.GetHairTriggerDown()) {   //If Trigger Pulled
+                    if (this.transform.childCount > 0) {    //If controller has children
+                        if(this.transform.GetChild(0).tag == "Shield") player.CmdDropShield(obj);   //If Child is shield
                     }
                     else {
                         player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
@@ -52,9 +52,8 @@ public class NetworkInput : MonoBehaviour {
             }
 
 
-            if (GameObject.FindWithTag("Shield") != null) {
+            if (this.transform.childCount > 0) {    //If controller has children
                 model.SetActive(false);
-                Debug.Log("Shield found");
             }
         }
     }
