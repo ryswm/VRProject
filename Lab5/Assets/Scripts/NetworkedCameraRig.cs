@@ -97,6 +97,11 @@ public class NetworkedCameraRig : NetworkBehaviour {
         NetworkServer.Destroy(shield);
     }
 
+    [ClientRpc]
+    void RpcUpdateShield() {
+
+    }
+
     void Update () {
         // We do the head Avatar tracking here.
         if (isLocalPlayer) {
