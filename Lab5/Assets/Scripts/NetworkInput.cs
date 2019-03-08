@@ -47,7 +47,6 @@ public class NetworkInput : MonoBehaviour {
                     }
                     else {
                         player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
-                        player.CmdSetShieldParent(obj);
                        
                     }
 
