@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 //This object is added to the controller network avatars when the program is running as a client.
 [RequireComponent(typeof(Rigidbody), typeof(FixedJoint))]
@@ -46,6 +47,8 @@ public class NetworkInput : MonoBehaviour {
                     }
                     else {
                         player.CmdCreateShield(trackedObject.transform.position + trackedObject.transform.forward, transform.rotation, obj);
+                        player.CmdSetShieldParent(obj);
+                       
                     }
 
                 }

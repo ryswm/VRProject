@@ -20,9 +20,10 @@ public class ShieldPosSync : NetworkBehaviour {
 
 
 	// Use this for initialization
+    /* 
 	public override void OnStartClient () {
 		GameObject parent = ClientScene.FindLocalObject (parentID);
 		transform.SetParent (parent.transform);
-    }
+    }*/
 
 }

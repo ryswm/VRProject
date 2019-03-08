@@ -24,8 +24,7 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     //Added by Ryan
     public GameObject shieldMod;
-    GameObject shield;
-
+   NetworkInstanceId shieldId;
 
     
 
@@ -85,19 +84,50 @@ public class NetworkedCameraRig : NetworkBehaviour {
 
     [Command]
     internal void CmdCreateShield(Vector3 pos, Quaternion rot, GameObject obj) {
-        shield = Instantiate(shieldMod, pos, rot );
+        GameObject shield = Instantiate(shieldMod, pos, rot );
+        
+        NetworkServer.Spawn(shield);
+        shieldId = shield.GetComponent<NetworkIdentity>().netId;
+
+    }
+
+     [Command]
+     public void CmdSetShieldParent(GameObject obj) {
+        NetworkInstanceId netid = obj.GetComponent<NetworkIdentity>().netId;
+        Debug.Log("1" + obj);
+        Debug.Log("2" + obj.transform.parent);
+        Debug.Log("3" + netid);
+        GameObject parentOBJ = obj.transform.parent.gameObject;
+        GameObject shield = ClientScene.FindLocalObject(parentOBJ.GetComponent<NetworkedCameraRig>().shieldId);
         shield.transform.SetParent(obj.transform);
         shield.transform.localPosition = Vector3.zero;
         shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
         shield.transform.Rotate(90f, 0f, 0f, Space.Self);
-		shield.GetComponent<ShieldPosSync>().parentID = obj.GetComponent<NetworkIdentity> ().netId;
-        NetworkServer.SpawnWithClientAuthority(shield, CameraRig);
+         RpcSetShieldParent(obj);
     }
+
 
     [Command]
     internal void CmdDropShield(GameObject obj) {
+        GameObject parentOBJ = obj.transform.parent.gameObject;
+        GameObject shield = ClientScene.FindLocalObject(parentOBJ.GetComponent<NetworkedCameraRig>().shieldId);
         Destroy(shield);
         NetworkServer.Destroy(shield);
+    }
+
+    
+    [ClientRpc]
+    public void RpcSetShieldParent(GameObject obj) {
+       NetworkInstanceId netid = obj.GetComponent<NetworkIdentity>().netId;
+        Debug.Log("RPC 1" + obj);
+        Debug.Log("RPC 2" + obj.transform.parent);
+        Debug.Log("RPC 3" + netid);
+        GameObject parentOBJ = obj.transform.parent.gameObject;
+        GameObject shield = ClientScene.FindLocalObject(parentOBJ.GetComponent<NetworkedCameraRig>().shieldId);
+        shield.transform.SetParent(obj.transform);
+        shield.transform.localPosition = Vector3.zero;
+        shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
+        shield.transform.Rotate(90f, 0f, 0f, Space.Self);
     }
 
     [ClientRpc]
