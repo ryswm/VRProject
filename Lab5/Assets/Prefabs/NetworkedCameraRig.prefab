@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048072164414322}
   - component: {fileID: 54807638120591674}
+  - component: {fileID: 114750650648421056}
   m_Layer: 0
   m_Name: LeftController
   m_TagString: Untagged
@@ -184,6 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4297409022180352}
   - component: {fileID: 54951458654353034}
+  - component: {fileID: 114807582909522734}
   m_Layer: 0
   m_Name: RightController
   m_TagString: Untagged
@@ -720,6 +722,38 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &114750650648421056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1522159540490268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 20
+    i1: 89
+    i2: 13
+    i3: 173
+    i4: 253
+    i5: 35
+    i6: 206
+    i7: 52
+    i8: 56
+    i9: 72
+    i10: 74
+    i11: 179
+    i12: 221
+    i13: 151
+    i14: 219
+    i15: 87
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114794729189170724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -739,6 +773,38 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114807582909522734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944499150373374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 20
+    i1: 89
+    i2: 13
+    i3: 173
+    i4: 253
+    i5: 35
+    i6: 206
+    i7: 52
+    i8: 56
+    i9: 72
+    i10: 74
+    i11: 179
+    i12: 221
+    i13: 151
+    i14: 219
+    i15: 87
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!135 &135037266240559994
 SphereCollider:
   m_ObjectHideFlags: 1

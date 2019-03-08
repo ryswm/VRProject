@@ -19,6 +19,7 @@ public class NetworkInput : MonoBehaviour {
         model = transform.parent.Find(this.name + "Model").gameObject;
 
         obj = this.gameObject;
+
     }
 
     void Update () {
