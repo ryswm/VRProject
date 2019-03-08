@@ -91,7 +91,7 @@ public class NetworkedCameraRig : NetworkBehaviour {
         shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
         shield.transform.Rotate(90f, 0f, 0f, Space.Self);
 		shield.GetComponent<ShieldPosSync>().parentID = obj.GetComponent<NetworkIdentity> ().netId;
-        NetworkServer.Spawn(shield);
+        NetworkServer.SpawnWithClientAuthority(shield, CameraRig);
     }
 
     [Command]
