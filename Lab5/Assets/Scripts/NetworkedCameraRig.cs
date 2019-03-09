@@ -78,8 +78,11 @@ public class NetworkedCameraRig : NetworkBehaviour {
     {
         //Instantiate on the sever
         GameObject obj = Instantiate(spherePrefab, pos, rot);
+
+        obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 15.0f;
         //Instantiate on the client
         NetworkServer.Spawn(obj);
+        Destroy(obj, 3);
     }
 
     [Command]
@@ -96,25 +99,30 @@ public class NetworkedCameraRig : NetworkBehaviour {
      [Command]
      public void CmdSetShieldParent(GameObject obj, NetworkInstanceId shieldId) {
         NetworkInstanceId netid = obj.GetComponent<NetworkIdentity>().netId;
+
         Debug.Log("1" + obj);
         Debug.Log("2" + obj.transform.parent);
         Debug.Log("3" + netid);
+
         GameObject parentOBJ = obj.transform.parent.gameObject;
         GameObject shield = ClientScene.FindLocalObject(shieldId);
+
         shield.transform.SetParent(obj.transform);
         shield.transform.localPosition = Vector3.zero;
         shield.transform.localScale = new Vector3(1.5f, 0.1f, 3.0f);
         shield.transform.Rotate(90f, 0f, 0f, Space.Self);
+
         String path = obj.name + "/";
-         RpcSetShieldParent(netid, shieldId);
+        RpcSetShieldParent(netid, shieldId);
          
     }
 
 
     [Command]
     internal void CmdDropShield(GameObject obj) {
-        GameObject parentOBJ = obj.transform.parent.gameObject;
-        GameObject shield = ClientScene.FindLocalObject(parentOBJ.GetComponent<NetworkedCameraRig>().shieldId);
+        //GameObject parentOBJ = obj.transform.parent.gameObject;
+        //GameObject shield = ClientScene.FindLocalObject(parentOBJ.GetComponent<NetworkedCameraRig>());
+        GameObject shield = obj.transform.GetChild(0).gameObject;
         Destroy(shield);
         NetworkServer.Destroy(shield);
     }
