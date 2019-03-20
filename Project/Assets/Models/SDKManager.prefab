@@ -865,7 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5837af0260a118e4d808bfe0405429a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  persistOnLoad: 0
   autoManageScriptDefines: 1
   activeScriptingDefineSymbolsWithoutSDKClasses: []
   scriptAliasLeftController: {fileID: 1076992963199278}
@@ -874,6 +873,8 @@ MonoBehaviour:
   autoLoadSetup: 1
   setups:
   - {fileID: 114518405098821578}
+  excludeTargetGroups: 1b0000001a000000
+  persistOnLoad: 0
 --- !u!114 &114205632154479422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -885,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0893f0c8a7712e8458dc3722eef95aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
 --- !u!114 &114243370628720756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,15 +928,20 @@ MonoBehaviour:
   showControlHints: 1
   hideHandsAtSwitch: 0
   resetHandsAtSwitch: 1
-  mouseMovementInput: 0
+  showHandAxisHelpers: 1
   lockMouseToView: 1
+  mouseMovementInput: 0
   handMoveMultiplier: 0.2
   handRotationMultiplier: 30
   playerMoveMultiplier: 5
   playerRotationMultiplier: 0.5
   playerSprintMultiplier: 2
+  lockedCursorMultiplier: 5
+  leftHandColor: {r: 1, g: 0, b: 0, a: 1}
+  rightHandColor: {r: 0, g: 1, b: 0, a: 1}
   mouseMovementKey: 325
   toggleControlHints: 282
+  toggleMouseLock: 285
   changeHands: 9
   handsOnOff: 308
   rotationPosition: 304
@@ -1061,6 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0893f0c8a7712e8458dc3722eef95aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
 --- !u!114 &114954894271912656
 MonoBehaviour:
   m_ObjectHideFlags: 1
