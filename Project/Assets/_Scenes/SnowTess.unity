@@ -382,6 +382,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: actualBoundaries
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: actualHeadset
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: actualLeftController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: actualRightController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: modelAliasLeftController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114518405098821578, guid: 0a334fdc4a4b143fa86164a65c4f918d,
+        type: 2}
+      propertyPath: modelAliasRightController
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a334fdc4a4b143fa86164a65c4f918d, type: 2}
   m_IsPrefabParent: 0

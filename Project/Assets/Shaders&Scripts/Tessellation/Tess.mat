@@ -93,7 +93,7 @@ Material:
     - _SnowMetallic: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tess: 32
+    - _Tess: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
