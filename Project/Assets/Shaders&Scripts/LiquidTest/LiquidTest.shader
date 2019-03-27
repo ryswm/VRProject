@@ -19,7 +19,7 @@
 		#if !defined(FLOW_INCLUDED)
 		#define FLOW_INCLUDED
 
-		float FlowUV (float2 uv, float2 flowVector, float time){
+		float2 FlowUV (float2 uv, float2 flowVector, float time){
 		    float pro = frac(time);
 		    return uv - flowVector * pro;
 		}
