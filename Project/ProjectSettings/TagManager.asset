@@ -9,6 +9,10 @@ TagManager:
   - floor
   - Holo
   - stage
+  - Holo
+  - Floor
+  - MusicTele
+  - LiquidTele
   layers:
   - Default
   - TransparentFX

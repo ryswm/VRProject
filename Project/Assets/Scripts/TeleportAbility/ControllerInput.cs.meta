@@ -1,11 +1,14 @@
 fileFormatVersion: 2
 guid: 40241c4c0c2f746e9a9f5d35fc143db8
-timeCreated: 1553658902
+timeCreated: 1553690833
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - laser: {fileID: 1900900863060142, guid: 6a2e119c2ad288c42a31a7e8453899bb, type: 2}
+  - telePointer: {instanceID: 0}
+  - cam: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

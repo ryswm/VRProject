@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public class SceneManager_Lobby : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
-		Debug.Log("Hu");
 		if(col.CompareTag("Player")){
-			SceneManager.LoadScene("Music");
+			if(this.transform.CompareTag("LiquidTele")){
+				SceneManager.LoadScene("Liquid");
+			} else if(this.transform.CompareTag("MusicTele")){
+				SceneManager.LoadScene ("Music");
 		}
+				
 	}
+}
 }
