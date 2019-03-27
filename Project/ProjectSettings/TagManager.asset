@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
-  - projectile
-  - floor
-  - stage
+  - Holo
+  - Floor
   layers:
   - Default
   - TransparentFX
