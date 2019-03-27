@@ -61,6 +61,7 @@ public class Controller_Template : MonoBehaviour {
 
         if (Controller.GetHairTrigger()) {
             Debug.Log(gameObject.name + "Press Hold");
+            Debug.Log(gameObject.name + Controller.GetAxis());
             laserShow();
            
           
@@ -94,6 +95,8 @@ public class Controller_Template : MonoBehaviour {
             if (rayhit.collider.CompareTag("stage"))
             {
                 hitGround = true;
+                Debug.Log("hitGround " + cast.positionCount);
+
             }
             else
             {
