@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MeshDefomer : MonoBehaviour {
@@ -20,12 +21,14 @@ public class MeshDefomer : MonoBehaviour {
 		meshpoints = mesh.vertices;
 		Originalpoints = mesh.vertices;
 		colors = new Color[meshpoints.Length];
-		
+        mesh.MarkDynamic();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Debug.Log("Vertex Count: "+ mesh.vertexCount);
 		Debug.Log("meshPoint Len: "+ meshpoints.Length);
+        meshpoints[meshpoints.Length / 2] = Vector3.up * AudioPeer.freqBands[band] * scaleMulti;
+        mesh.SetVertices(meshpoints.ToList());
 	}
 }
