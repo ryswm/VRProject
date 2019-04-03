@@ -7,7 +7,7 @@ public class AudioPeer : MonoBehaviour {
 
     private static int numOfBars = 512;
     public static float[] freqBands = new float[8];
-    AudioSource _audioSource;
+    public static AudioSource _audioSource;
     public static float[] _samples = new float[numOfBars];
 	// Use this for initialization
 	void Start () {
@@ -26,6 +26,26 @@ public class AudioPeer : MonoBehaviour {
         _audioSource.GetSpectrumData(_samples, 0,FFTWindow.Blackman);
     }
 
+    public static void changeAudio(Vector2 axis)
+    {
+        //low2 + (value - low1) * (high2 - low2) / (high1 - low1)
+        
+        _audioSource.pitch = -3 + (axis.x - -1) * (3 - -3) / (1 - -1);
+        if(_audioSource.pitch == 0) _audioSource.pitch = 1;
+        _audioSource.spatialBlend = axis.y;
+        Debug.Log("PITCH LEVEL: " +  _audioSource.pitch);
+         Debug.Log("spatialBlend LEVEL: " +  _audioSource.spatialBlend);
+    }
+
+
+     public static void resetAudio()
+    {
+        _audioSource.pitch = 1;
+        _audioSource.spatialBlend = 0;
+        _audioSource.reverbZoneMix = 1;
+        Debug.Log("DOPPLER LEVEL: " +  _audioSource.dopplerLevel);
+
+    }
     void makeFrequencyBands()
     {
         int band = 0;

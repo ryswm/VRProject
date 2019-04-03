@@ -11,6 +11,7 @@ public class Controller_Template : MonoBehaviour {
     private LineRenderer cast;
     private bool hitGround;
 
+    int scale = 10;
 
     private SteamVR_TrackedObject trackedObj;
 
@@ -38,16 +39,18 @@ public class Controller_Template : MonoBehaviour {
         cast.enabled = false;
         // If left Grip Button is pressed, Spawn ballon
         if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip)) {
-            Debug.Log(gameObject.name + " Grip Press");
+            Debug.Log(gameObject.name + " Grip Press2");
     
         }
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Grip)) {
-            Debug.Log(gameObject.name + " Grip Press");
+            Debug.Log(gameObject.name + " Grip Press1");
+            Debug.Log("GRIP AUDIO CHANGE" + Controller.GetAxis().x);
+            AudioPeer.changeAudio(Controller.GetAxis());
     
         }
         if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Grip)) {
             Debug.Log(gameObject.name + " Grip Release");
-
+            AudioPeer.resetAudio();
         }
 
         if (Controller.GetAxis() != Vector2.zero) {
