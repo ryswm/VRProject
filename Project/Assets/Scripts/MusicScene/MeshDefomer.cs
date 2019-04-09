@@ -28,7 +28,10 @@ public class MeshDefomer : MonoBehaviour {
 	void Update () {
 		Debug.Log("Vertex Count: "+ mesh.vertexCount);
 		Debug.Log("meshPoint Len: "+ meshpoints.Length);
-        meshpoints[meshpoints.Length / 2] = Vector3.up * AudioPeer.freqBands[band] * scaleMulti;
+        mesh.SetVertices(Originalpoints.ToList());
+        int ran = Random.Range(0, 20);
+        meshpoints[ (meshpoints.Length / 2)] = Vector3.up * AudioPeer.freqBands[band] * scaleMulti;
+        meshpoints[(meshpoints.Length / 2)] = Vector3.up * AudioPeer.freqBands[band] * scaleMulti;
         mesh.SetVertices(meshpoints.ToList());
 	}
 }
