@@ -72,7 +72,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FlowOff: 0
-    - _FlowStrength: 0.1
+    - _FlowStrength: 0
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
@@ -85,9 +85,9 @@ Material:
     - _Speed: 0.5
     - _SrcBlend: 1
     - _Tiling: 3
-    - _UJump: 0
+    - _UJump: -0.074
     - _UVSec: 0
-    - _VJump: 0
+    - _VJump: 0.102
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
