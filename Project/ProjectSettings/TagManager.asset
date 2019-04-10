@@ -13,6 +13,8 @@ TagManager:
   - Floor
   - MusicTele
   - LiquidTele
+  - XylophoneKey
+  - Mallet
   layers:
   - Default
   - TransparentFX
