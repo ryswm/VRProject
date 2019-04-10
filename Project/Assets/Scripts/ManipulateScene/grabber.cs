@@ -58,7 +58,7 @@ public class grabber : MonoBehaviour {
 
         joint.connectedBody = inHand.GetComponent<Rigidbody>();
         inHand.GetComponent<Collider>().isTrigger = true;
-        inHand.GetComponent<RigidBody>().useGravity = false;
+        inHand.GetComponent<Rigidbody>().useGravity = false;
 
        
     }
@@ -70,7 +70,7 @@ public class grabber : MonoBehaviour {
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
             inHand.GetComponent<Collider>().isTrigger = false;
-            inHand.GetComponent<RigidBody>().useGravity = true;
+            inHand.GetComponent<Rigidbody>().useGravity = true;
             inHand.GetComponent<Rigidbody>().velocity = Controller.velocity;
             inHand.GetComponent<Rigidbody>().angularVelocity = Controller.angularVelocity;
         }
