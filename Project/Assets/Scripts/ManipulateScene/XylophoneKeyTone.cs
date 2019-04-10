@@ -32,7 +32,7 @@ void OnAudioFilterRead(float[] data, int channels){
 
 void OnTriggerEnter(Collider col){
 	if(col.GetComponent<Collider>().tag == "Mallet"){
-		gain = 0.1f;
+		gain = 0.4f;
 	}
 }
 
