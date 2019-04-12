@@ -1,5 +1,5 @@
 ﻿//Texture Distortion tutorial
-Shader "Custom/LiquidTest" {
+Shader "Waves" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
@@ -17,10 +17,19 @@ Shader "Custom/LiquidTest" {
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 
-		_Amp("Amp", Float) = 1
-		_Wave("Wave", Float) = 10
-		_wSpeed("Speed", Float) = 10
-		_Direction ("Direction (2D)", Vector) = (1,0,0,0)
+		_WaveA("Wave A (Direction, Steepness, Wavelength)", Vector) = (1,0,0.5,10)
+		_WaveB ("Wave B", Vector) = (0,1,0.15,20)
+		_WaveC ("Wave C", Vector) = (0,1,0.15,20)
+		_WaveD ("Wave D", Vector) = (0,1,0.15,20)
+		_WaveE ("Wave E", Vector) = (0,1,0.15,20)
+		_WaveF ("Wave F", Vector) = (0,1,0.15,20)
+		_WaveG ("Wave G", Vector) = (0,1,0.10,20)
+
+		_FreqCount("Counter", Float) = 1.0
+		_MySpeed("my Speed", Float) = 1.0
+
+		_Tess ("Tessellation", Range(1,32)) = 4
+		_Cube ("Cubemap", CUBE) = "" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -28,7 +37,7 @@ Shader "Custom/LiquidTest" {
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows vertex:vert
+		#pragma surface surf Standard fullforwardshadows vertex:vert addshadow tessellate:tessFixed
 		#pragma target gl4.1
 		
 		//Flow Functionality
@@ -49,10 +58,17 @@ Shader "Custom/LiquidTest" {
 
 		sampler2D _MainTex, _FlowMap, _DerivHMap;
 		float _UJump, _VJump, _Tiling, _Speed, _FlowStrength, _FlowOff;
-		float _Amp;
-		float _Wave;
-		float _wSpeed;
-		float2 _Direction;
+		float4 _WaveA, _WaveB, _WaveC, _WaveD, _WaveE, _WaveF, _WaveG;
+
+		half _Glossiness;
+		half _Metallic;
+		fixed4 _Color;
+		float _FreqCount;
+
+		float _MySpeed;
+		float _Tess;
+		samplerCUBE _Cube;
+		
 
 		float3 UnpackDerivativeHeight(float4 textureData){
 			float3 dh = textureData.agb;
@@ -60,24 +76,56 @@ Shader "Custom/LiquidTest" {
 			return dh;
 		}
 
+		float4 tessFixed()
+        {
+            return _Tess;
+        }
+
 		struct Input {
 			float2 uv_MainTex;
+			//Emission Map Vars
+			/*float3 worldRefl; 
+			INTERNAL_DATA*/
 		};
 
-		half _Glossiness;
-		half _Metallic;
-		fixed4 _Color;
+		float3 GerstnerWave (
+			float4 wave, float3 p, inout float3 tangent, inout float3 binormal
+		) {
+		    float steepness = wave.z;
+		    float wavelength = wave.w;
+			float k;
+			if(_FreqCount > 0){
+				k = 2 * UNITY_PI / (wavelength/_FreqCount);
+			} else{
+				k = 2 * UNITY_PI / wavelength;
+			}
+
+					//Wavelength
+			float c = sqrt(9.8 / k);					//Speed
+			float2 d = normalize(wave.xy);				//Normals
+			float f = k * (dot(d, p.xz) - (c * _MySpeed) * _Time.y); 
+			float a = steepness / k;					//Amplitude
+
+			tangent += float3(-d.x * d.x * (steepness * sin(f)), d.x * (steepness * cos(f)), -d.x * d.y * (steepness * sin(f)));
+			binormal += float3(-d.x * d.y * (steepness * sin(f)), d.y * (steepness * cos(f)), -d.y * d.y * (steepness * sin(f)));
+			return float3(d.x * (a * cos(f)), a * sin(f), d.y * (a * cos(f)));
+		}
+		
 
 		void vert (inout appdata_full vertexData){
-			float3 p = vertexData.vertex.xyz;
-			float k = 2 * UNITY_PI / _Wave;
-			float2 d = normalize(_Direction);
-			float f = k * (dot(d, p.xz) - _Speed * _Time.y);
-			p.x += d.x * (_Amp * cos(f));
-			p.y = _Amp * sin(f);
-			p.z += d.y * (_Amp * cos(f));
-			float3 tangent = normalize(float3(1 - k * _Amp * sin(f), k * _Amp * cos(f), 0));
-			float3 normal = float3(-tangent.y, tangent.x, 0);
+			float3 gridPoint = vertexData.vertex.xyz;
+			float3 tangent = float3(1, 0, 0);
+			float3 binormal = float3(0, 0, 1);
+			float3 p = gridPoint;
+			//float3 steep = normalize(float3(_WaveA.z, _WaveB.z, _WaveC.z));
+			p += GerstnerWave(_WaveA, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveB, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveC, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveD, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveE, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveF, gridPoint, tangent, binormal);
+			p += GerstnerWave(_WaveG, gridPoint, tangent, binormal);
+			float3 normal = normalize(cross(binormal, tangent));
 			vertexData.vertex.xyz = p;
 			vertexData.normal = normal;
 		}
@@ -105,6 +153,7 @@ Shader "Custom/LiquidTest" {
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;
+			//o.Emission = texCUBE (_Cube, WorldReflectionVector (IN, o.Normal)).rgb;
 		}
 		ENDCG
 	}

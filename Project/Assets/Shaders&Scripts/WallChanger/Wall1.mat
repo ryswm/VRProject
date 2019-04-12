@@ -28,7 +28,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DispTex:
         m_Texture: {fileID: 2800000, guid: 44ba7ab0ba45a40c2b0732763eb4c82f, type: 3}
-        m_Scale: {x: 5, y: 1}
+        m_Scale: {x: 9, y: 2}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
@@ -36,11 +36,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 6faefa3be7dec4f3eb9f85a35b312ce3, type: 3}
-        m_Scale: {x: 5, y: 1}
+        m_Scale: {x: 9, y: 2}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 2800000, guid: b19bedac4410f412cb5afe90b720e89e, type: 3}
-        m_Scale: {x: 5, y: 1}
+        m_Scale: {x: 9, y: 2}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
