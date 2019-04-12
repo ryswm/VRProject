@@ -53,13 +53,16 @@ void OnTriggerEnter(Collider col){
 		waveProp.material.SetFloat("_MySpeed", 10);
 		waveProp.material.SetInt(waveLet,1);
 
+		GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
 	}
 }
 
 void OnTriggerExit(Collider col){
 	if(col.GetComponent<Collider>().tag == "Mallet"){
 		gain = 0.0f;
-		
+		GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+
 	}
 }
 

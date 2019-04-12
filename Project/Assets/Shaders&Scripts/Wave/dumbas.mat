@@ -79,7 +79,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 1
     - _Mode: 0
-    - _MySpeed: 1
+    - _MySpeed: 10
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -92,12 +92,19 @@ Material:
     - _UVSec: 0
     - _VJump: 0
     - _WaveA: 0
+    - _WaveAON: 0
     - _WaveB: 0
+    - _WaveBON: 0
     - _WaveC: 0
+    - _WaveCON: 0
     - _WaveD: 0
+    - _WaveDON: 0
     - _WaveE: 0
+    - _WaveEON: 0
     - _WaveF: 0
+    - _WaveFON: 0
     - _WaveG: 0
+    - _WaveGON: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
