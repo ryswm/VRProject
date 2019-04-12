@@ -11,7 +11,7 @@ public float gain;
 private double increment;
 private double phase;
 private double sample = 48000.0;
-
+public string waveLet;
 public GameObject wave;
 private Renderer waveProp;
 
@@ -19,7 +19,15 @@ void Start(){
 	waveProp = wave.GetComponent<Renderer>();
 }
 
-
+void Update()
+{
+	if (phase == 0.0)
+	{
+			waveProp.material.SetFloat("_FreqCount", 0);
+			waveProp.material.SetFloat("_MySpeed", 10);
+			waveProp.material.SetInt(waveLet,0);
+	}
+}
 
 void OnAudioFilterRead(float[] data, int channels){
 	increment = freq * 2.0 * Mathf.PI / sample;
@@ -32,7 +40,7 @@ void OnAudioFilterRead(float[] data, int channels){
 			data[i + 1] = data[i];
 		}
 
-		if(phase > (Mathf.PI * 2)){
+		if(phase > (Mathf.PI * 10)){
 			phase = 0.0;
 		}
 	}
@@ -41,8 +49,9 @@ void OnAudioFilterRead(float[] data, int channels){
 void OnTriggerEnter(Collider col){
 	if(col.GetComponent<Collider>().tag == "Mallet"){
 		gain = 0.4f;
-		waveProp.material.SetFloat("_FreqCount", waveProp.material.GetFloat("_FreqCount") + 1);
-		waveProp.material.SetFloat("_MySpeed", waveProp.material.GetFloat("_MySpeed") + 1);
+		//waveProp.material.SetFloat("_FreqCount", waveProp.material.GetFloat("_FreqCount") + 1);
+		waveProp.material.SetFloat("_MySpeed", 10);
+		waveProp.material.SetInt(waveLet,1);
 
 	}
 }
@@ -50,6 +59,7 @@ void OnTriggerEnter(Collider col){
 void OnTriggerExit(Collider col){
 	if(col.GetComponent<Collider>().tag == "Mallet"){
 		gain = 0.0f;
+		
 	}
 }
 

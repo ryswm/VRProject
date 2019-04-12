@@ -25,6 +25,15 @@ Shader "Waves" {
 		_WaveF ("Wave F", Vector) = (0,1,0.15,20)
 		_WaveG ("Wave G", Vector) = (0,1,0.10,20)
 
+		_WaveAON("Wave A (Direction, Steepness, Wavelength)", Int) = 0
+		_WaveBON ("Wave B", Int) = 0
+		_WaveCON ("Wave C", Int) = 0
+		_WaveDON ("Wave D", Int) = 0
+		_WaveEON ("Wave E", Int) = 0
+		_WaveFON ("Wave F", Int) = 0
+		_WaveGON ("Wave G", Int) = 0
+
+
 		_FreqCount("Counter", Float) = 1.0
 		_MySpeed("my Speed", Float) = 1.0
 
@@ -38,7 +47,7 @@ Shader "Waves" {
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
 		#pragma surface surf Standard fullforwardshadows vertex:vert addshadow tessellate:tessFixed
-		#pragma target gl4.1
+		#pragma target 4.5
 		
 		//Flow Functionality
 		#if !defined(FLOW_INCLUDED)
@@ -59,6 +68,7 @@ Shader "Waves" {
 		sampler2D _MainTex, _FlowMap, _DerivHMap;
 		float _UJump, _VJump, _Tiling, _Speed, _FlowStrength, _FlowOff;
 		float4 _WaveA, _WaveB, _WaveC, _WaveD, _WaveE, _WaveF, _WaveG;
+		int _WaveAON, _WaveBON, _WaveCON, _WaveDON, _WaveEON, _WaveFON, _WaveGON;
 
 		half _Glossiness;
 		half _Metallic;
@@ -68,6 +78,7 @@ Shader "Waves" {
 		float _MySpeed;
 		float _Tess;
 		samplerCUBE _Cube;
+		
 		
 
 		float3 UnpackDerivativeHeight(float4 textureData){
@@ -118,13 +129,28 @@ Shader "Waves" {
 			float3 binormal = float3(0, 0, 1);
 			float3 p = gridPoint;
 			//float3 steep = normalize(float3(_WaveA.z, _WaveB.z, _WaveC.z));
+
+			if(_WaveAON == 1){
 			p += GerstnerWave(_WaveA, gridPoint, tangent, binormal);
+			}
+			if(_WaveBON == 1){
 			p += GerstnerWave(_WaveB, gridPoint, tangent, binormal);
+			}
+			if(_WaveCON == 1){
 			p += GerstnerWave(_WaveC, gridPoint, tangent, binormal);
+			}
+			if(_WaveDON == 1){
 			p += GerstnerWave(_WaveD, gridPoint, tangent, binormal);
+			}
+			if(_WaveEON == 1){
 			p += GerstnerWave(_WaveE, gridPoint, tangent, binormal);
+			}
+			if(_WaveFON == 1){
 			p += GerstnerWave(_WaveF, gridPoint, tangent, binormal);
+			}
+			if(_WaveGON == 1){
 			p += GerstnerWave(_WaveG, gridPoint, tangent, binormal);
+			}
 			float3 normal = normalize(cross(binormal, tangent));
 			vertexData.vertex.xyz = p;
 			vertexData.normal = normal;

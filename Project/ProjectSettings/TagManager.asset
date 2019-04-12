@@ -4,17 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
-  - projectile
-  - floor
-  - Holo
   - stage
-  - Holo
+  - XylophoneKey
+  - Mallet
   - Floor
   - MusicTele
   - LiquidTele
-  - XylophoneKey
-  - Mallet
+  - Manipulate
   layers:
   - Default
   - TransparentFX
